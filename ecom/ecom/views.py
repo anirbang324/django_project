@@ -19,11 +19,12 @@ def about_page(request):
 
 
 def contact_page(request):
-    contact_form = ContactForm()
+    contact_form = ContactForm(request.POST or None)
     context = {
         'title': 'contact Page',
         'message': 'Contact us',
         'contact_form' : contact_form
     }
-
+    if contact_form.is_valid():
+        print(contact_form.cleaned_data)
     return render(request, "contact/page.html", context)
